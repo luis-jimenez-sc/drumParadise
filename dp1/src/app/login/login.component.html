@@ -1,0 +1,72 @@
+<div class="container text-center">
+    <strong style="font-family: 'Marko One', serif;" >Ya casi esta logueado !  </strong>
+</div>
+
+<div class="container " style="border:solid 1px; background-color: azure; ">
+
+    <form [formGroup]="formulario" (ngSubmit)="enviar(formulario)"   class="form-horizontal">
+         <!--  correo -->
+         <br>
+         <div class="form-group row">
+            <label class="control-label col-sm-4 col-md-2" for="correo">correo de usuario</label>
+            <div class="col-sm-8 col-md-10">
+
+                <input type="text" placeholder= "correo de usuario" formControlName="correo"
+                title="correo de usuario"
+                [class.is-invalid]="correo.touched && correo.invalid" 
+                class="form-control" required>
+            
+                <small class="text-danger" 
+                *ngIf="correo.hasError('required') && correo.touched ">
+                correo requerido</small>
+
+            </div>
+        </div>
+         <!--  pass -->
+         <div class="form-group row">
+            <label class="control-label col-sm-4 col-md-2" for="pass">password</label>
+            <div class="col-sm-8 col-md-10">
+
+                <input type="password"  placeholder= "introduce tu pass" formControlName="pass"
+                title="introduce tu pass" #myPass
+                [class.is-invalid]="pass.touched && pass.invalid" 
+                class="form-control" required>
+            
+                <small class="text-danger" 
+                *ngIf="pass.hasError('required') && pass.touched ">
+                pass obligatoria</small>
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-12">
+                <div class="checkbox">
+                    <label><input type="checkbox" #verPass (change)="viendoPass(verPass.checked,myPass )"> 
+                        ver pass
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- COOKIES  -->
+        <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-12">
+                <div class="checkbox">
+                    <label><input type="checkbox" formControlName="recordarPass" id="recordarPass" > 
+                        recordar pass
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!--  submit -->
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10 text-center">
+                <button   class="btn btn-primary" >Continuar</button> <!-- [disabled]="!formulario.valid " -->
+            </div>
+        </div>
+    </form>
+
+</div>

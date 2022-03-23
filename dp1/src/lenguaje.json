@@ -1,0 +1,15 @@
+[{
+	"formControlName": "nombre",
+    "label": "Nombre:",
+    "placeholder":"Introduce tu nombre",
+    "small":"nombre obligatorio"
+}, {
+	"id": "01049",
+	"nm": "Añana"
+}, {
+	"id": "01003",
+	"nm": "Aramaio"
+}, {
+	"id": "52001",
+	"nm": "Melilla"
+}]

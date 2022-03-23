@@ -1,0 +1,169 @@
+
+<div class="container text-center ">
+    <strong style="font-family: 'Marko One', serif;">{{salu2.salu2}}</strong>
+</div>
+
+<div class="container " style="border:solid 1px; background-color: azure; ">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit(formulario)"   class="form-horizontal">
+        <!--  nombre -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="nombre">{{nombreJ.lbl}}</label>
+            <div class="col-sm-10">
+
+                <input type="text" placeholder= {{nombreJ.ph}} formControlName="nombre"
+                title={{nombreJ.ttl}}
+                [class.is-invalid]="nombre.touched && nombre.invalid" 
+                class="form-control" required>
+            
+                <small class="text-danger" 
+                *ngIf="nombre.hasError('required') && nombre.touched ">
+                {{nombreJ.erOblig}}</small>
+
+            </div>
+        </div>
+
+        <!-- apellido -->
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="apellidos">{{apelli2J.lbl}}</label>
+            <div class="col-sm-10">
+
+                <input type="text" placeholder={{apelli2J.ph}} formControlName="apellidos"
+                title={{apelli2J.ttl}}
+                [class.is-invalid]="apellidos.invalid && apellidos.touched"
+                class="form-control" required>
+
+                <small class="text-danger" 
+                *ngIf="apellidos.hasError('required') && apellidos.touched ">
+               {{apelli2J.erOblig}}</small>
+
+            </div>
+        </div>
+        <!-- email con id -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">{{correoJ.lbl}}</label>
+            <div class="col-sm-10">
+
+                <input type="email" placeholder={{correoJ.ph}} formControlName="email"
+                data-toggle="tooltip" title={{correoJ.ttl}}
+                [class.is-invalid]="email.invalid  && email.touched"
+                 class="form-control" id="email" required>
+
+                <small class="text-danger"
+                 *ngIf="email.hasError('required') && email.touched">
+                 {{correoJ.erOblig}}</small>
+
+                <small class="text-danger" *ngIf="email.hasError('email')  && email.touched">
+               {{correoJ.erTipo}} </small>
+
+            </div>
+        </div>
+
+        <!-- telefono -->
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="telefono">{{telefonoJ.lbl}}</label>
+            <div class="col-sm-10">
+
+                <input type="number" placeholder={{telefonoJ.ph}} formControlName="telefono"
+                data-toggle="tooltip" title={{telefonoJ.ttl}}
+                [class.is-invalid]="telefono.invalid  && telefono.touched"
+                class="form-control" id="telefono" required>
+
+                <small class="text-danger"
+                *ngIf="telefono.hasError('required')  && telefono.touched">
+                {{telefonoJ.erOblig}}</small>
+
+                <small class="text-danger" *ngIf="telefono.hasError('minLength')">
+                {{telefonoJ.erTipo}}-</small>
+
+                <small class="text-danger" *ngIf="telefono.hasError('maxlength')">
+                    {{telefonoJ.erTipo}}+</small>
+
+            </div>
+        </div>
+        <!-- pais-->
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="pais">{{paisJ.lbl}}</label>
+
+            <div class="col-sm-10">
+
+                <select class="form-control" formControlName="pais" id="pais"
+                    [class.is-invalid]="pais.invalid  && pais.touched" required>
+            
+                    <option *ngFor="let item of opciones"  [value]="item.value">{{item.description}}</option>
+                </select>
+
+                <small class="text-danger" 
+                *ngIf="pais.hasError('required')  && pais.touched">
+                pais obligatorio</small>
+                
+            </div>
+
+        </div>
+
+        <!-- formGoupName  passwords -->
+        <div class="form-group" formGroupName="passwords">
+
+            <!--  pass -->
+            <label class="control-label col-sm-2" for="pass">{{pass1J.lbl}}</label>
+            <div class="col-sm-10">
+            
+                <input type="password"  formControlName="pass"
+                data-toggle="tooltip" title={{pass1J.ttl}}
+                [class.is-invalid]="pass.invalid && pass.touched"
+                class="form-control" id="pass" required>
+
+                <small class="text-danger"
+                *ngIf="pass.hasError('required') && pass.touched">
+                pass obligatoria</small>
+                 <small class="text-danger" *ngIf="pass.hasError('pattern')">  <!--pass.errors.pattern-->
+                     debe contener una mayuscula,minuscula,numero,caracter especial y mas de 9 digitos</small> 
+            </div>
+
+             <!-- CONF pass -->
+           
+            <label class="control-label col-sm-4" for="passConf">{{pass2J.lbl}}</label>
+                <div class="col-sm-10">
+                    <input type="password" formControlName="passConf" (change)=passConfMy()
+                    [class.is-invalid]="passConf.invalid && passConf.touched"
+                    class="form-control" id="passConf" required>
+
+                    <small class="text-danger" 
+                    *ngIf="passConf.hasError('required') && this.passConf.touched">
+                   {{pass2J.erOblig}}</small>
+                        
+                    <!-- <small *ngIf="">no coinciden</small> -->
+                    <small class="text-danger"
+                    *ngIf="pass.value != passConf.value && passConf.value != null && passConf.touched" >
+                    {{pass2J.erTipo}}</small>
+                </div>
+            
+
+        </div>
+
+       
+
+        <!-- TERMINOS  Validators.requiredTrue -->
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label><input type="checkbox" formControlName="terminos" id="terminos" required> 
+                        {{checkJ.check}}
+                    </label> <br>
+                    <small class="text-danger" 
+                    *ngIf="formulario.get('terminos').hasError('required')  && formulario.get('terminos').touched">
+                    {{checkJ.erOblig}}</small>
+                </div>
+            </div>
+        </div>
+        <!-- submit -->
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button   class="btn btn-primary" [disabled]="!formulario.valid && !confirmada" >{{btnJ.btn}}</button> <!-- [disabled]="!formulario.valid && !confirmada" -->
+            </div>
+        </div>
+    </form>
+</div>

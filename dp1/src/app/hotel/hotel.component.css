@@ -1,0 +1,9 @@
+.fondo{
+    background-color: lightskyblue;   
+}
+
+.resalto{
+    text-decoration-line: underline ;  
+    font-weight: lighter;
+    font-weight: bolder;
+}
